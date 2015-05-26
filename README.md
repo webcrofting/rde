@@ -11,7 +11,7 @@ Because I wanted something better than RVM to do my rails development.
 
 ### ... get started
 
-- Install (docker-compose)[http://docs.docker.com/compose/]
+- Install [docker-compose](http://docs.docker.com/compose/)
 - Copy rde.sh to your path
 - Go to the directory where you want to create your rails app
 - call rde.sh create

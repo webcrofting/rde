@@ -1,6 +1,6 @@
 # Rails [Docker|Development] Environment
 
-A simple shell script that creates a Rails Docker Evironment with a Postgres Database
+A simple shell script that creates a Rails Docker Environment with a Postgres Database
 
 ## Why?
 

@@ -18,6 +18,11 @@ Because I wanted something better than RVM to do my rails development.
 - call rde.sh start
 - point your browser to localhost:3000
 
+### ... use it for an existing project
+
+- Go to your rails directory 
+- call rde.sh init
+
 ### ... bundle
 
 - rde.sh bundle (it rebuilds the docker image)
@@ -29,6 +34,26 @@ Because I wanted something better than RVM to do my rails development.
 ### ... generate
 
 - rde.sh run rails g whateveryouwant
+
+## Usage
+
+```
+Usage: rde.sh {init|create|run|start|help} PARAMETERS
+
+init:       Creates a docker-compose.yml
+create:     Bootstraps a new rails app in the current
+            directory and sets up database access for
+            the rails app.
+run:        Runs a command inside the docker container.
+            (Useful eg. for running rake db:migrate )
+start:      Starts the rails app
+bundle:     Installs new Gems and commits container
+destroy-db: Destroys the database container and erases the data
+help:       Displays this usage message
+            Use $0 help COMMAND to get more detailed
+            information.
+
+```
 
 
 ## But I want ...

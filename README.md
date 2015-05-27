@@ -38,7 +38,7 @@ Because I wanted something better than RVM to do my rails development.
 ## Usage
 
 ```
-Usage: rde.sh {init|create|run|start|help} PARAMETERS
+Usage: rde.sh {init|create|run|start|bundle|destroy-db|help} PARAMETERS
 
 init:       Creates a docker-compose.yml
 create:     Bootstraps a new rails app in the current

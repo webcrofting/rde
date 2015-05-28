@@ -98,33 +98,7 @@ function amend_gitignore() {
   fi
 }
 
-function create() {
-
-  if [ ! -f docker-compose.yml ]; then
-    echo ""
-    echo "== Info =="
-    echo "No docker-compose.yml found."
-    echo "Calling init ..."
-    echo "=========="
-    echo ""
-    init
-  fi
-
-  if [ -d app ]; then
-    echo ""
-    echo "== Error =="
-    echo "There seems to be a rails application already there"
-    echo "Not creating new one."
-    echo "==========="
-    echo ""
-    exit 1
-  fi
-
-
-  echo "creating new rails app ... "
-
-  $SUDO_DOCKER docker-compose run --no-deps --rm rails rails new -fB .
-
+function adjust_database() {
   echo "adjusting database.yml ... "
   cat > config/database.yml <<EOF
 default: &default
@@ -153,6 +127,38 @@ EOF
   echo "adjusting Gemfile ..."
 
   sed -i "s/^gem 'sqlite3'$/gem 'pg'/g" Gemfile
+
+
+}
+
+function create() {
+
+  if [ ! -f docker-compose.yml ]; then
+    echo ""
+    echo "== Info =="
+    echo "No docker-compose.yml found."
+    echo "Calling init ..."
+    echo "=========="
+    echo ""
+    init
+  fi
+
+  if [ -d app ]; then
+    echo ""
+    echo "== Error =="
+    echo "There seems to be a rails application already there"
+    echo "Not creating new one."
+    echo "==========="
+    echo ""
+    exit 1
+  fi
+
+
+  echo "creating new rails app ... "
+
+  $SUDO_DOCKER docker-compose run --no-deps --rm rails rails new -fB .
+
+  adjust_database
 
   echo "updating bundle ..."
   $SUDO_DOCKER docker-compose build
@@ -323,6 +329,9 @@ case "$1" in
         ;;
         destroy-db)
                 destroy_db
+        ;;
+        adjust-db)
+                adjust_database
         ;;
         help)
                 usage $2

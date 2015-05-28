@@ -83,11 +83,22 @@ EOF
   touch .env
   touch Gemfile
 
+  amend_gitignore
+
 }
 
+function amend_gitignore() {
+  if [ -f .gitignore ]; then
+    if grep -Fxq "Dockerfile" .gitignore ; then
+      echo "Dockerfile" >> .gitignore
+    fi
+    if grep -Fxq "docker-compose.yml" .gitignore ; then
+      echo "docker-compose.yml" >> .gitignore
+    fi
+  fi
+}
 
-
-function create(){
+function create() {
 
   if [ ! -f docker-compose.yml ]; then
     echo ""
@@ -148,6 +159,8 @@ EOF
 
   echo "initializing database ..."
   $SUDO_DOCKER docker-compose run --rm rails /bin/bash -c "sleep 5 && rake db:migrate"
+
+  amend_gitignore
 
 }
 

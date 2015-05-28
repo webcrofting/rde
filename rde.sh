@@ -89,10 +89,10 @@ EOF
 
 function amend_gitignore() {
   if [ -f .gitignore ]; then
-    if grep -Fxq "Dockerfile" .gitignore ; then
+    if ! grep -Fxq "Dockerfile" .gitignore ; then
       echo "Dockerfile" >> .gitignore
     fi
-    if grep -Fxq "docker-compose.yml" .gitignore ; then
+    if ! grep -Fxq "docker-compose.yml" .gitignore ; then
       echo "docker-compose.yml" >> .gitignore
     fi
   fi
@@ -248,23 +248,11 @@ EOF
 
 }
 
-function usage_destroy_db() {
-  cat <<EOF
-
-Usage: ${0} destroy-db
-
-Destroys the associated Postgres database container and erases the data.
-
-EOF
-
-}
-
-
 function usage_general(){
 
   cat <<EOF
 
-Usage: ${0} {init|create|run|start|bundle|destroy-db|help} PARAMETERS
+Usage: ${0} {init|create|run|start|help} PARAMETERS
 
 init:       Creates a docker-compose.yml
 
@@ -306,9 +294,6 @@ function usage() {
     ;;
     bundle)
       usage_bundle
-    ;;
-    destroy-db)
-      usage_destroy_db
     ;;
     *)
       usage_general

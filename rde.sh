@@ -183,6 +183,7 @@ function run() {
 
 function start() {
   $SUDO_DOCKER docker-compose up
+  rm tmp/pids/server.pid
 }
 
 function destroy_db() {

@@ -50,7 +50,7 @@ start:      Starts the rails app
 bundle:     Installs new Gems and commits container
 destroy-db: Destroys the database container and erases the data
 help:       Displays this usage message
-            Use $0 help COMMAND to get more detailed
+            Use rde.sh help COMMAND to get more detailed
             information.
 
 ```

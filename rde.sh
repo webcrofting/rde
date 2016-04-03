@@ -34,7 +34,7 @@ function init(){
   fi
   echo "Creating project with projectname: $PROJECTNAME"
   echo "Creating Dockerfile ..."
-  cat > Dockerfile <<EOF
+  cat > DockerfileRDE <<EOF
 
 FROM rails
 
@@ -64,6 +64,7 @@ postgres:
 
 rails:
   build: .
+  dockerfile: DockerfileRDE
   working_dir: /usr/src/app
   user: "$(id -u):$(id -g)"
   volumes:
@@ -90,7 +91,7 @@ EOF
 function amend_gitignore() {
   if [ -f .gitignore ]; then
     if ! grep -Fxq "Dockerfile" .gitignore ; then
-      echo "Dockerfile" >> .gitignore
+      echo "DockerfileRDE" >> .gitignore
     fi
     if ! grep -Fxq "docker-compose.yml" .gitignore ; then
       echo "docker-compose.yml" >> .gitignore
